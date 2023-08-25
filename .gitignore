@@ -1,0 +1,13 @@
+.venv
+
+uvicorn main:app --reload --port 3001
+
+cd .venv 
+source bin/activate
+
+
+# dependencies
+/.venv
+/__pychache__
+/package-lock.json
+/package.json
