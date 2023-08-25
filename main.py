@@ -1,9 +1,10 @@
+from datetime import datetime
+
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-
-
+from Module import DataBase, GetTime
 
 app = FastAPI()
 
@@ -27,6 +28,13 @@ class User(BaseModel):
     password: str
 
 users_db = {}
+
+# DB 코드 추가
+host = '192.168.38.122'
+user = 'admin'
+password = 'happy1003!'
+db = 'Hackathon'
+data = DataBase(host, user, password, db)
 
 @app.get("/")
 def read_root():
@@ -63,6 +71,10 @@ async def signup(user: User):
     users_db[user.username] = user.password
     return {"Sign up successful"}
 
+@app.get("/get_time")
+async def get_time():
+    nowtime = datetime.now()
+    time = GetTime().sendtime()
+    print(type(time))
 
-
-
+    return {time}
