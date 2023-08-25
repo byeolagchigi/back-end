@@ -73,7 +73,6 @@ async def signup(user: User):
 
 @app.get("/get_time")
 async def get_time():
-    nowtime = datetime.now()
     time = GetTime().sendtime()
     print(type(time))
 
